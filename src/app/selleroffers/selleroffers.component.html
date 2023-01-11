@@ -1,0 +1,132 @@
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Breeze Admin</title>
+    <link rel="stylesheet" href="/assets/vendors/mdi/css/materialdesignicons.min.css" />
+    <link rel="stylesheet" href="/assets/vendors/flag-icon-css/css/flag-icon.min.css" />
+    <link rel="stylesheet" href="/assets/vendors/css/vendor.bundle.base.css" />
+    <link rel="stylesheet" href="/assets/vendors/select2/select2.min.css" />
+    <link rel="stylesheet" href="/assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="shortcut icon" href="/assets/images/favicon.png" />
+  </head>
+  <body>
+    <div class="container-scroller">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div class="text-center sidebar-brand-wrapper d-flex align-items-center">
+          <a class="sidebar-brand brand-logo" [routerLink]="'/dashseller'"><img src="assets/img/logo3.png" alt="" width="1000px" ></a>
+          <a class="sidebar-brand brand-logo-mini pl-4 pt-3"[routerLink]="'/dashseller'"><img src="assets/img/logo3.png" alt="" width="1000px" ></a>
+        </div>
+        <ul class="nav">
+         
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="'/dashseller'">
+                <i class="mdi mdi-home menu-icon"></i>
+                <span class="menu-title" >Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="pages/ui-features/typography.html">Typography</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="'/dashform'" >
+                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                <span class="menu-title">Forms</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="'/selleroffers'" >
+                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                <span class="menu-title" >Vos offres</span>
+              </a>
+            </li>
+            <li class="nav-item sidebar-actions">
+              <div class="nav-link">
+                <div class="mt-4">
+                  <div class="border-none">
+                    <p class="text-black">Notification</p>
+                  </div>
+                  <ul class="mt-4 pl-0">
+                    <li>Sign Out</li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+          </ul>
+      </nav>
+     
+<div class="w-100 mt-6 m-5 p-4">
+    <div class=" ">
+      <div class="card">
+        <div class="">
+          <h4 class="card-title pl-4">Your offers History</h4>
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="bg-light">
+                <tr>
+                  <th>id</th>
+                  <th>title</th>
+                  <th>start date</th>
+                  <th>end date</th>
+                  <th>Address</th>
+                  <th>prix initial</th>
+                  <th>Winner</th>
+                  <th>price of winner </th>
+                </tr>
+              </thead>
+              <tbody>
+               
+                <tr *ngFor="let offre of offres;">
+                  <td>
+                  {{offre.id}}
+                  </td>
+
+                  <td>{{offre.title}}</td>
+                  <td>
+                  {{offre.debutAuction}}
+                  </td>
+                  <td>
+                    {{offre.duration}}
+                    </td>
+                    <td>
+                      {{offre.address}}
+                      </td>
+                      <td>
+                        {{offre.initialprice}}
+                        </td>
+                </tr>
+                
+              
+               
+               
+             
+              </tbody>
+            </table>
+          </div>
+          <a class="text-black mt-3 d-block pl-4" href="#">
+            <span class="font-weight-medium h6">View all order history</span>
+            <i class="mdi mdi-chevron-right"></i></a>
+        </div>
+      </div>
+    </div>
+   
+  </div>
+
+  </div>
+  </body>
+  
