@@ -27,5 +27,8 @@ export class OffresService {
   getofferByIdUser(iduser: number) : Observable<any> {
     return this.http.get<any>(`${this.apiServerURL}/offers/getOffersByUser/${iduser}`);
   }
+  getData(surface: number,nbChambre:number) : Observable<any> {
+    return this.http.get<any>(`${this.apiServerURL}/offers/filterOffers/${surface}/${nbChambre}`);
+  }
 
 }

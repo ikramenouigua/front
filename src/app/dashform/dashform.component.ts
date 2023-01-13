@@ -123,9 +123,11 @@ onSubmit(){
   this.addedOffer.description=this.form.value.offerDetails.description;
   this.addedOffer.imagename=this.selectedFile.name;
   this.addedOffer.iduser=this.currentuser.id;
+  this.addedOffer.surface=this.form.value.offerDetails.surface;
+  this.addedOffer.nbChambre=this.form.value.offerDetails.nbChambre;
    console.log("saaam"+this.addedOffer.imagename)
   console.log(this.addedOffer);
-  console.log(this.form.value.offerDetails.description);
+  console.log(this.form.value.offerDetails);
   this.saveOffer(this.addedOffer);
   //alert("votre compte est bien enregistré");
 

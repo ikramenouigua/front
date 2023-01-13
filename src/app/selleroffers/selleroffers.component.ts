@@ -24,6 +24,8 @@ export class SelleroffersComponent implements OnInit {
   parentSelector: boolean = false;
   public currentuser : Appuser = new Appuser();
   public users : Array<User> = [];
+  postResponse: any;
+  postResponse1: any;
 
   constructor(private sharedService : SharedServiceService,
     private offreService: OffresService,
@@ -58,9 +60,28 @@ export class SelleroffersComponent implements OnInit {
       this.offreService.getofferByIdUser(this.currentuser.id).subscribe(
         (response: Offre[]) => {
           this.offres = response;
-        console.log(this.offres)
-    
-      
+        
+
+          for(let offre of this.offres ){
+            if(offre.stateoffer=="finished"){
+            this.httpClient.get('http://localhost:8889/auctions/findWinner/' + offre.id)
+            .subscribe(
+              res => {
+                this.postResponse = res;
+                offre.pricewinner = this.postResponse.price;
+                this.httpClient.get('http://localhost:8888/api/v1/registration/getUser/' + this.postResponse.iduser)
+                .subscribe(
+                  res1 => {
+                    this.postResponse1 = res1;
+                    offre.userwinner=this.postResponse1.firstName+" "+this.postResponse1.lastName;
+                  }
+                )
+                
+              }
+            );
+            
+          }
+        }
          
         },
         (error: HttpErrorResponse) => {
@@ -72,7 +93,7 @@ export class SelleroffersComponent implements OnInit {
   
   ngOnInit(): void {
     this.getCurrentUser();
-    console.log("haa idhh  :   "+this.currentuser.id)
+    
    
   }
 

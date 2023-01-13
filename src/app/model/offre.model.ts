@@ -7,6 +7,11 @@ export class Offre {
     debutAuction!:Date
     duration!:Date
     iduser!:number;
-    imagename!:any
+    imagename!:any;
+    surface:number;
+    nbChambre:number;
+    stateoffer!:any;
+    pricewinner!:any;
+    userwinner!:any;
 
 }

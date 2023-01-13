@@ -98,16 +98,23 @@
             <div class="col-md-7">
                 <div class="single-product-content">
                     <h3 *ngIf="offerSelected.title">{{offerSelected.title}}</h3>
-                    <p *ngIf="offerSelected.initialprice" class="single-product-pricing"><span></span> ${{offerSelected.initialprice}}</p>
+                    <div *ngIf="offerSelected.initialprice" class="text-dark"><span class="font-weight-bold">Prix initiale:       </span>${{offerSelected.initialprice}}</div>
+                    <div *ngIf="offerSelected.surface"  class="text-dark"><span class="font-weight-bold">Surface en m^2:       </span>${{offerSelected.surface}}</div>
+                    <div *ngIf="offerSelected.nbChambre"  class="text-dark"><span class="font-weight-bold">Nombre des chambres:       </span>${{offerSelected.nbChambre}}</div>
+                    <div *ngIf="offerSelected.description"  class="text-dark"><span class="font-weight-bold">Description de l'offre:       </span>{{offerSelected.description}}</div>
+                    <div *ngIf="offerSelected.debutAuction"  class="text-dark"><span class="font-weight-bold">Date debut de l'auction:       </span>{{offerSelected.debutAuction| date:'medium'}}</div>
+                    <div *ngIf="offerSelected.duration"  class="text-dark"><span class="font-weight-bold">Date fin:       </span>To: {{offerSelected.duration| date:'medium'}}</div>
+                    <!-- <p *ngIf="offerSelected.initialprice" class=""><span></span> ${{offerSelected.initialprice}}</p>
                     <p *ngIf="offerSelected.description">{{offerSelected.description}}</p>
                     <p *ngIf="offerSelected.debutAuction"class="single-product-pricing">{{offerSelected.debutAuction| date:'medium'}}</p><br>
-                    <p *ngIf="offerSelected.duration" class="single-product-pricing">To: {{offerSelected.duration| date:'medium'}}</p>
+                    <p *ngIf="offerSelected.duration" class="single-product-pricing">To: {{offerSelected.duration| date:'medium'}}</p> -->
+                    <br/>  <br/>
                     <div class="single-product-form">
                         <form  #myForm="ngForm"   ngNativeValidate>
                             <div ngModelGroup="bidDetails" #bidDetail="ngModelGroup">
                             <input name="price" id="price" [(ngModel)]="this.addedBid.price" type="number" placeholder="0">
                         </div>
-                        <a (click)="onSubmit();" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                        <a (click)="onSubmit();" class="cart-btn"><i class="fas fa-shopping-cart"></i> To bid</a>
                         </form>
                        
                         
