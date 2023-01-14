@@ -4,7 +4,22 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="/assets/css/style.css" />
     <link rel="shortcut icon" href="/assets/images/favicon.png" />
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyBlusny36BWvYqhlnIgl42wDQlOgTf-fzg&libraries=places"></script>
+  
   </head>
+  <style>
+    agm-map {
+     height: 500px;
+     display: block;
+  margin-left: auto;
+  margin-right: auto;
+   }
+  
+
+#map {
+  height: 500px;
+}
+  </style>
 <!-- header -->
 <div class="top-header-area" id="sticker">
     <div class="container">
@@ -25,22 +40,10 @@
                             <li class="current-list-item"><a [routerLink]="'/homePage'">Home</a>
                             </li>
                             <li><a >About</a></li>
-                            <li><a >Pages</a>
-                            </li>
-                            <li><a >News</a>
-                            </li>
-                            <li><a>Contact</a></li>
-                            <li><a >Shop</a>
-                            </li>
-                            <li>
-                                <div class="header-icons">
-                                    <a class="shopping-cart"><i class="fas fa-shopping-cart"></i></a>
-                                    <a class="mobile-hide search-bar-icon"><i class="fas fa-search"></i></a>
-                                </div>
+                            <li><a ></a>
                             </li>
                         </ul>
                     </nav>
-                    <a class="mobile-show search-bar-icon" ><i class="fas fa-search"></i></a>
                     <div class="mobile-menu"></div>
                     <!-- menu end -->
                 </div>
@@ -74,6 +77,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="single-product-img">
+                    <img [src]="offerSelected.imagename" alt="" height="200px" width="200px">
+                </div>
                 <div class="breadcrumb-text">
                     <p>{{this.currentuser.firstName}} </p>
                     <p>See more Details </p>
@@ -92,42 +98,57 @@
         <div class="row">
             <div class="col-md-5">
                 <div class="single-product-img">
-                    <img [src]="offerSelected.imagename" alt="">
+                    <img [src]="offerSelected.imagename" alt="" height="500px" width="500px">
                 </div>
             </div>
             <div class="col-md-7">
                 <div class="single-product-content">
                     <h3 *ngIf="offerSelected.title">{{offerSelected.title}}</h3>
-                    <div *ngIf="offerSelected.initialprice" class="text-dark"><span class="font-weight-bold">Prix initiale:       </span>${{offerSelected.initialprice}}</div>
-                    <div *ngIf="offerSelected.surface"  class="text-dark"><span class="font-weight-bold">Surface en m^2:       </span>${{offerSelected.surface}}</div>
-                    <div *ngIf="offerSelected.nbChambre"  class="text-dark"><span class="font-weight-bold">Nombre des chambres:       </span>${{offerSelected.nbChambre}}</div>
-                    <div *ngIf="offerSelected.description"  class="text-dark"><span class="font-weight-bold">Description de l'offre:       </span>{{offerSelected.description}}</div>
-                    <div *ngIf="offerSelected.debutAuction"  class="text-dark"><span class="font-weight-bold">Date debut de l'auction:       </span>{{offerSelected.debutAuction| date:'medium'}}</div>
-                    <div *ngIf="offerSelected.duration"  class="text-dark"><span class="font-weight-bold">Date fin:       </span>To: {{offerSelected.duration| date:'medium'}}</div>
+                    <div *ngIf="offerSelected.initialprice" class="text-dark"><span class="font-weight-bold">Prix initiale:      </span>${{offerSelected.initialprice}}<br> </div><br> 
+                    <div *ngIf="offerSelected.surface"  class="text-dark"><span class="font-weight-bold">Surface en m^2:       </span>${{offerSelected.surface}}<br> </div><br> 
+                    <div *ngIf="offerSelected.nbChambre"  class="text-dark"><span class="font-weight-bold">Nombre des chambres:       </span>${{offerSelected.nbChambre}}<br> </div><br> 
+                    <div *ngIf="offerSelected.description"  class="text-dark"><span class="font-weight-bold">Description de l'offre:       </span>{{offerSelected.description}}<br> </div><br> 
+                    <div *ngIf="offerSelected.debutAuction"  class="text-dark"><span class="font-weight-bold">Date debut de l'auction:       </span>{{offerSelected.debutAuction| date:'medium'}}<br> </div><br> 
+                    <div class="time-counter"><div class="time-countdown clearfix" data-countdown="2020/2/01"><div class="counter-column"><div class="inner"><span class="count">{{time/(1000*3600*24)}}</span>Days</div></div> <div class="counter-column"><div class="inner"><span class="count">{{this.time2.toString().substring(0,2)}}</span>Hours</div></div>    </div></div>
+                
+                    <div *ngIf="offerSelected.duration"  class="text-dark"><span class="font-weight-bold">Date fin:       </span>To: {{offerSelected.duration| date:'medium'}}<br> </div>
                     <!-- <p *ngIf="offerSelected.initialprice" class=""><span></span> ${{offerSelected.initialprice}}</p>
                     <p *ngIf="offerSelected.description">{{offerSelected.description}}</p>
                     <p *ngIf="offerSelected.debutAuction"class="single-product-pricing">{{offerSelected.debutAuction| date:'medium'}}</p><br>
                     <p *ngIf="offerSelected.duration" class="single-product-pricing">To: {{offerSelected.duration| date:'medium'}}</p> -->
-                    <br/>  <br/>
+                   
+                    <br>
                     <div class="single-product-form">
                         <form  #myForm="ngForm"   ngNativeValidate>
                             <div ngModelGroup="bidDetails" #bidDetail="ngModelGroup">
                             <input name="price" id="price" [(ngModel)]="this.addedBid.price" type="number" placeholder="0">
                         </div>
                         <a (click)="onSubmit();" class="cart-btn"><i class="fas fa-shopping-cart"></i> To bid</a>
-                        </form>
+                        
                        
+                        </form>
+                      
                         
                     </div>
                     
                 </div>
             </div>
+            <div class="col-xl-12">
+            <br> <br> <br>
+            <agm-map [latitude]="offerSelected.lat" [longitude]="offerSelected.lng">
+                   <agm-marker [latitude]="offerSelected.lat" [longitude]="offerSelected.lng"></agm-marker>
+                 </agm-map>
+                 
+                 <br> <br> <br>
+                
+                </div>
+                
         </div>
     </div>
 </div>
 <!-- end single product -->
 <div class="row" class="single-product mt-200 mb-200">
-    <div class="col-xl-8 col-sm-6 grid-margin stretch-card">
+    <div class="col-xl-12 col-sm-6 grid-margin stretch-card">
       <div class="card">
         <div class="card-body px-0 overflow-auto">
           <h4 class="card-title pl-4">Bidding History</h4>
@@ -171,78 +192,77 @@
 
 
 
-<!-- footer -->
-<div class="footer-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-6">
-                <div class="footer-box about-widget">
-                    <h2 class="widget-title">About us</h2>
-                    <p>Ut enim ad minim veniam perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae.</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="footer-box get-in-touch">
-                    <h2 class="widget-title">Get in Touch</h2>
-                    <ul>
-                        <li>34/8, East Hukupara, Gifirtok, Sadan.</li>
-                        <li>support@fruitkha.com</li>
-                        <li>+00 111 222 3333</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="footer-box pages">
-                    <h2 class="widget-title">Pages</h2>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="services.html">Shop</a></li>
-                        <li><a href="news.html">News</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="footer-box subscribe">
-                    <h2 class="widget-title">Subscribe</h2>
-                    <p>Subscribe to our mailing list to get the latest updates.</p>
-                    <form action="index.html">
-                        <input type="email" placeholder="Email">
-                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end footer -->
-
 <!-- copyright -->
 <div class="copyright">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-12">
-                <p>Copyrights &copy; 2019 - <a href="https://imransdesign.com/">Imran Hossain</a>,  All Rights Reserved.<br>
-                    Distributed By - <a href="https://themewagon.com/">Themewagon</a>
+                <p>Copyrights &copy; 2023 - <a href="https://imransdesign.com/">Ikrame nouigua & Houda jouhar</a>,  All Rights Reserved.<br>
+                   
                 </p>
             </div>
             <div class="col-lg-6 text-right col-md-12">
-                <div class="social-icons">
-                    <ul>
-                        <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="#" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-                        <li><a href="#" target="_blank"><i class="fab fa-dribbble"></i></a></li>
-                    </ul>
-                </div>
+                
             </div>
         </div>
     </div>
 </div>
 <!-- end copyright -->
-
+<script>
+    var map = L.map('map', {
+      center: [33.98431409557283, -6.867546799166454],
+      zoom: 15,
+      scrollWheelZoom: true
+    });
+    L.tileLayer(
+      'https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: ''
+      }).addTo(map);
+    L.marker([33.98431409557283, -6.867546799166454]).addTo(map)
+      .bindPopup("<img src='https://pbs.twimg.com/media/FdFcLSIWAAAY6Xo.jpg' width='100%'/>" +
+        "<table class='table' style='border-spacing: 10px;'> <thead> <tr> <th>Propriété</th> <th>Ville</th> <th>Infos</th> </tr> </thead> <tbody> <tr> <td scope='row'>ENSIAS</td> <td>RABAT</td> <td> INFORMATIQUE</td> </tr> </tbody> </table>"
+      );
+    /******************************** Store Cords*****************************/
+    var testCords = [{
+      la: '33.984249813050646',
+      lg: '-6.876239776611329'
+    }, {
+      la: '33.980867273286606 ',
+      lg: '-6.874737739562989'
+    }, {
+      la: '33.98246954574348 ',
+      lg: '-6.856284141540528'
+    }, ];
+    var j = 0;
+    testCords.forEach(element => {
+      L.marker([element.la, element.lg]).addTo(map)
+        .bindPopup("Namespace : " + (j++));
+    });
+    /******************************** Store Cords*****************************/
+    /**********************************************************************************/
+    map.on('click', function (e) {
+      var i = 0;
+      var coord = e.latlng;
+      var lat = coord.lat;
+      var lng = coord.lng;
+      var myMarker = L.marker(L.latLng(lat, lng), {
+          title: 'unselected'
+        })
+        .addTo(map).bindPopup("name " + (i + 1));
+      alert("You clicked the map at latitude: " + lat + " and longitude: " + lng);
+      console.log("You clicked the map at latitude: " + lat + " and longitude: " + lng);
+    });
+    /**********************************************************************************/
+   //Search bar
+    var searchControl = new L.esri.Controls.Geosearch().addTo(map);
+    var results = new L.LayerGroup().addTo(map);
+    /**********************************************************************************/
+  </script>
+<script type="module" src="./index.ts"></script>
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6KXBkQGXUsIaF6u96_Q4EzUG8s0Q9OWE&callback=initMap&v=weekly"
+      defer
+    ></script>
 <!-- jquery -->
 <script src="assets/js/jquery-1.11.3.min.js"></script>
 <!-- bootstrap -->

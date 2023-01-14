@@ -9,6 +9,7 @@ import { User } from '../model/user.model';
 import { OffresService } from '../services/offres.service';
 import { RegistrationService } from '../services/registration.service';
 import { SharedServiceService } from '../services/shared-service.service';
+import * as L from 'leaflet';
 
 @Component({
   selector: 'app-dashform',
@@ -34,17 +35,52 @@ export class DashformComponent implements OnInit {
   retrievedImage: any;
   message: string;
 
+  public lat2:number
+  public lng2:number
+  private map;
+
+  markerIcon = {
+    icon: L.icon({
+      iconSize: [25, 41],
+      iconAnchor: [10, 41],
+      popupAnchor: [2, -40],
+      // specify the path here
+      iconUrl: "https://unpkg.com/leaflet@1.5.1/dist/images/marker-icon.png",
+      shadowUrl: "https://unpkg.com/leaflet@1.5.1/dist/images/marker-shadow.png"
+    })
+  };
+
   constructor(private registrationService: RegistrationService,private offerService: OffresService,
     private sharedService : SharedServiceService, private router : Router,private httpClient: HttpClient) { }
 
+    
+
   async ngOnInit(){
     await this.getCurrentUser();
+    this.map = L.map("map").setView([33.9839727096169, -6.867586970329286], 4);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(this.map);
     
+    this.map.once("click", e => {
+      
+       // get the coordinates
+      this.lat2=e.latlng.lat
+      this.lng2=e.latlng.lng
+      L.marker([this.lat2,this.lng2], this.markerIcon).addTo(this.map); // add the marker onclick
+      this.addedOffer.lat=this.lat2;
+      this.addedOffer.lng=this.lng2
+      console.log(this.lng2);
+    });
   }
 
   
 
  saveOffer(offer : Offre) {
+  this.addedOffer.lat=this.lat2;
+      this.addedOffer.lng=this.lng2
+      console.log(this.lng2);
   this.errors = [];
   this.offerService.addOffer(offer)
     .subscribe(data => {
@@ -125,8 +161,10 @@ onSubmit(){
   this.addedOffer.iduser=this.currentuser.id;
   this.addedOffer.surface=this.form.value.offerDetails.surface;
   this.addedOffer.nbChambre=this.form.value.offerDetails.nbChambre;
+  this.addedOffer.lat=this.lat2;
+  this.addedOffer.lng=this.lng2
    console.log("saaam"+this.addedOffer.imagename)
-  console.log(this.addedOffer);
+  console.log(this.addedOffer.lat);
   console.log(this.form.value.offerDetails);
   this.saveOffer(this.addedOffer);
   //alert("votre compte est bien enregistré");

@@ -13,5 +13,7 @@ export class Offre {
     stateoffer!:any;
     pricewinner!:any;
     userwinner!:any;
+    lat!:number
+    lng!:number
 
 }

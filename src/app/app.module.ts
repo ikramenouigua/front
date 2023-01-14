@@ -16,6 +16,8 @@ import { DashformComponent } from './dashform/dashform.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import { SelleroffersComponent } from './selleroffers/selleroffers.component';
+import { environment } from 'src/environments/environment';
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,11 @@ import { SelleroffersComponent } from './selleroffers/selleroffers.component';
     MatInputModule,
     BrowserAnimationsModule,
     NgxPaginationModule,
-    Ng2OrderModule
+    Ng2OrderModule,
+    AgmCoreModule.forRoot({
+      apiKey: environment['AIzaSyADopB7KGl360qvdsEY_Tp3-DlNqd4usUI'],
+      libraries: ['places']
+    }),
 
   ],
   exports: [

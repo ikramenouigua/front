@@ -18,20 +18,8 @@
                         <ul>
                             <li class="current-list-item"><a [routerLink]="'/homePage'">Home</a>
                             </li>
-                            <li><a >About</a></li>
-                            <li><a >Pages</a>
-                            </li>
-                            <li><a >News</a>
-                            </li>
-                            <li><a>Contact</a></li>
-                            <li><a >Shop</a>
-                            </li>
-                            <li>
-                                <div class="header-icons">
-                                    <a class="shopping-cart"><i class="fas fa-shopping-cart"></i></a>
-                                    <a class="mobile-hide search-bar-icon"><i class="fas fa-search"></i></a>
-                                </div>
-                            </li>
+                            <li><a ></a></li>
+                           
                         </ul>
                     </nav>
                     <a class="mobile-show search-bar-icon" ><i class="fas fa-search"></i></a>
@@ -105,10 +93,10 @@
              
               <div class="form-group">
                
-                <label class="" for="inlineFormInput">Surface</label>
+                <h5 class="" for="inlineFormInput">Surface :</h5>
                 <input type="text"  formControlName="surface" class="form-control mb-2" id="inlineFormInput" placeholder="Surface">
                 
-                <label class="ml-3" for="inlineFormInput ">        Nombre chambres</label>
+                <h5 class="ml-3" for="inlineFormInput " >        Nombre chambres :</h5><br>
                 <input type="text"  formControlName="nbChambre" class="form-control mb-2" id="inlineFormInput" placeholder="Nombre chambres">
               </div>
              
@@ -120,10 +108,11 @@
           </form>
         <div class="row">
             <div class="col  text-center " *ngFor="let offre of offres;">
+                <div class="product-image" >
+                    <a [routerLink]="['/description', offre.id]"><img [src]="offre.imagename" alt="" height="200px" width="200px"></a>
+                </div>
                 <div class="single-product-item" >
-                    <div class="product-image" >
-                        <a [routerLink]="['/description']"><img [src]="offre.imagename" alt=""></a>
-                    </div>
+                    
                     <h3>{{offre.title}}</h3>
                     <p class="product-price"> {{offre.initialprice}}dh </p>
                     <a  [routerLink]="['/description', offre.id]" class="cart-btn"><i class="fas fa-eye"></i> Voir</a>
@@ -198,20 +187,12 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-12">
-                <p>Copyrights &copy; 2019 - <a href="https://imransdesign.com/">Ikrame nouigua & Houda jouhar</a>,  All Rights Reserved.<br>
-                     <a href="https://themewagon.com/"></a>
+                <p>Copyrights &copy; 2023 - <a href="https://imransdesign.com/">Ikrame nouigua & Houda jouhar</a>,  All Rights Reserved.<br>
+                   
                 </p>
             </div>
             <div class="col-lg-6 text-right col-md-12">
-                <div class="social-icons">
-                    <ul>
-                        <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="#" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-                        <li><a href="#" target="_blank"><i class="fab fa-dribbble"></i></a></li>
-                    </ul>
-                </div>
+                
             </div>
         </div>
     </div>

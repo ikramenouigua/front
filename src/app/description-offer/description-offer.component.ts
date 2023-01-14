@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Offre } from '../model/offre.model';
 import { OffresService } from '../services/offres.service';
@@ -10,6 +10,11 @@ import { Auction } from '../model/auction';
 import { NgForm } from '@angular/forms';
 import { AuctionService } from '../services/auction.service';
 import { User } from '../model/user.model';
+import { MapsAPILoader } from '@agm/core';
+import { AgmMap } from '@agm/core'; 
+import * as L from 'leaflet';
+
+
 
 @Component({
   selector: 'app-description-offer',
@@ -31,9 +36,11 @@ export class DescriptionOfferComponent implements OnInit {
   private t: any;
   p:number=1;
   postResponse: any;
+  time:any
 
   key:string ="id";
   reverse:boolean=false;
+  time2: number;
   sort(key){
     this.key=key;
     this.reverse=!this.reverse
@@ -58,8 +65,12 @@ export class DescriptionOfferComponent implements OnInit {
    await this.getAuctionsbyofferid()
     console.log("gbhj,njbjhbhjn,",this.auctionsbyofferid)
     this.getUsers()
-  }
 
+
+  }
+  getDiffDays(startDate, endDate) {
+    return Math.ceil(Math.abs(startDate - endDate) / (1000 * 60 * 60 * 24));
+  }
 
   public async getCurrentUser(): Promise<void> {
     this.registrationService.getUser().subscribe(
@@ -139,7 +150,14 @@ export class DescriptionOfferComponent implements OnInit {
 
   public async getAuctionsbyofferid(): Promise<void> {
     //await this.getOfferById(this.offreId)
-    console.log(this.offerSelected.id)
+    console.log(this.getDiffDays(this.offerSelected.debutAuction.toString().substring(8,10),this.offerSelected.duration.toString().substring(8,10)));
+    console.log(new Date(this.offerSelected.duration).getTime)
+    const t1=new Date(this.offerSelected.debutAuction)
+    const t2=new Date(this.offerSelected.duration)
+    this.time=Math.abs(t1.getTime()-t2.getTime())
+    console.log(this.time/(1000*3600*24))
+    this.time2=(this.time-this.time/(1000*3600*24))/(10000*3600)
+    console.log(this.time2-(this.time-this.time/(1000*3600*24))/(10000*3600*24*60))
     this.auctionService.getAuctionByofferId(this.offerSelected.id).subscribe(
       (response: Auction[]) => {
         this.auctionsbyofferid = response;
