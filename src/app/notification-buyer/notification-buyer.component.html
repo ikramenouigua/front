@@ -129,11 +129,12 @@
                 <div class="text"></div>
                 <div *ngFor="let offre of auctionwinners;">
                 <!--Countdown Timer-->
-                <div > <div class="notice success"><p> Congratulation ,you win the offer with price {{offre.priceWin}}.</p>
+                <div > <div class="notice success"><p> Congratulation ,you win the offer with price {{offre.priceWin}}. with {{offre.statut}} hh</p>
                     <div *ngIf="offre.statut==etat">
                     <button type="button" class="btn btn-info m-4"  (click)="accepter(offre.id)" >accepter</button>
                     <button type="button" class="btn btn-secondary" (click)="refuser(offre.id)">refuser</button></div>
                 </div>
+                <div>{{offre.statut}}</div>
                 <div *ngIf="offre.statut==etataccepter">
                     you already accept this offer
                 </div>

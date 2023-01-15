@@ -19,5 +19,8 @@ export class WinnerauctionService {
   public refuserOffre(id:number):Observable<any>{
     return this.http.get<any>(`${this.apiServerURL}/winnerAuction/refuser/${id}`)
   }
+  public getAuctionVendu(id:number):Observable<any>{
+    return this.http.get<any>(`${this.apiServerURL}/winnerAuction/sellerwinauction/${id}`)
+  }
 
 }

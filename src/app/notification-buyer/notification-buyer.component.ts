@@ -20,6 +20,7 @@ export class NotificationBuyerComponent {
   public etataccepter :string
   public etatrefuser :string
   public logout : String=new String();
+  public auc=new Auctionwinner();
 
 
   constructor(private registrationService: RegistrationService, private sharedService : SharedServiceService,
@@ -58,7 +59,10 @@ export class NotificationBuyerComponent {
     this.winnerAuctionService.getAuctionWinner(this.currentuser.id).subscribe(
       (response: Auctionwinner[]) => {
         this.auctionwinners = response;
-        
+        console.log(this.auctionwinners)
+        for(let auction in this.auctionwinners){
+           console.log(auction.statut)
+        }
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

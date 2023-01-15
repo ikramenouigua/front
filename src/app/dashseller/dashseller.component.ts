@@ -3,12 +3,14 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Appuser } from '../model/appuser.model';
+import { Auctionwinner } from '../model/auctionwinner';
 import { Login } from '../model/login.model';
 import { Offre } from '../model/offre.model';
 import { User } from '../model/user.model';
 import { OffresService } from '../services/offres.service';
 import { RegistrationService } from '../services/registration.service';
 import { SharedServiceService } from '../services/shared-service.service';
+import { WinnerauctionService } from '../services/winnerauction.service';
 @Component({
   selector: 'app-dashseller',
   templateUrl: './dashseller.component.html',
@@ -26,6 +28,7 @@ export class DashsellerComponent implements OnInit {
   public addedLogin : Login = new Login();
   parentSelector: boolean = false;
   public currentuser : Appuser = new Appuser();
+  public auctionwinners:Array<Auctionwinner> = [];
 
   public availableoffers:any;
   public finishedoffers:any;
@@ -36,17 +39,22 @@ export class DashsellerComponent implements OnInit {
   public fioffers:number;
   public nsoffers:number;
   public nboffers:number;
+  public nbvenduoffre:number;
+  public revenu:number;
 
   
 
   constructor(private registrationService: RegistrationService,private offerService: OffresService,
     private sharedService : SharedServiceService, private router : Router,
-    private offreService: OffresService) { }
+    private offreService: OffresService,
+    private winnerAuctionService:WinnerauctionService) { }
 
   async ngOnInit(){
     this.fioffers=0;
     this.avoffers=0;
     this.nsoffers=0;
+    this.nbvenduoffre=0;
+    this.revenu=0;
     await this.getCurrentUser();
    
     
@@ -62,6 +70,7 @@ export class DashsellerComponent implements OnInit {
        this.getFinishedOffres();
        this.getNotStartedOffres();
        this.getNOffres();
+       this.getoffresvendu();
      },
      (error: HttpErrorResponse) => {
        alert(error.message);
@@ -75,6 +84,21 @@ export class DashsellerComponent implements OnInit {
       this.availableoffers = response;
       console.log("sala"+this.availableoffers.length)
       this.avoffers=this.availableoffers.length;
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+  );
+}
+
+public getoffresvendu(): void {
+  this.winnerAuctionService.getAuctionVendu(this.currentuser.id).subscribe(
+    (response: [Auctionwinner]) => {
+      this.auctionwinners = response;
+      this.nbvenduoffre=this.auctionwinners.length;
+      for(let auction of this.auctionwinners){
+        this.revenu+=auction.priceWin;
+      }
     },
     (error: HttpErrorResponse) => {
       alert(error.message);
