@@ -6,6 +6,7 @@ import { DescriptionOfferComponent } from './description-offer/description-offer
 import { HomePageComponent } from './home-page/home-page.component';
 import { RegisterComponent } from './register/register.component';
 import {SelleroffersComponent} from './selleroffers/selleroffers.component'
+import {NotificationBuyerComponent} from './notification-buyer/notification-buyer.component'
 
 const routes: Routes = [
   {path:'homePage',component: HomePageComponent},
@@ -13,7 +14,9 @@ const routes: Routes = [
   {path:'register',component: RegisterComponent},
   {path:'dashseller',component: DashsellerComponent},
   {path:'dashform',component: DashformComponent},
-  {path:'selleroffers',component: SelleroffersComponent}
+  {path:'selleroffers',component: SelleroffersComponent},
+  {path:'notificationBuyer',component: NotificationBuyerComponent}
+
 ];
 
 @NgModule({

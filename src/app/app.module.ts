@@ -18,6 +18,7 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
 import { SelleroffersComponent } from './selleroffers/selleroffers.component';
 import { environment } from 'src/environments/environment';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { NotificationBuyerComponent } from './notification-buyer/notification-buyer.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
     DashsellerComponent,
     DashformComponent,
     SelleroffersComponent,
+    NotificationBuyerComponent,
     
   ],
   imports: [

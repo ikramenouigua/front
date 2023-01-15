@@ -27,11 +27,28 @@ export class DashsellerComponent implements OnInit {
   parentSelector: boolean = false;
   public currentuser : Appuser = new Appuser();
 
+  public availableoffers:any;
+  public finishedoffers:any;
+  public notstartedoffers:any;
+  public offers:any;
+
+  public avoffers:number;
+  public fioffers:number;
+  public nsoffers:number;
+  public nboffers:number;
+
+  
+
   constructor(private registrationService: RegistrationService,private offerService: OffresService,
-    private sharedService : SharedServiceService, private router : Router) { }
+    private sharedService : SharedServiceService, private router : Router,
+    private offreService: OffresService) { }
 
   async ngOnInit(){
+    this.fioffers=0;
+    this.avoffers=0;
+    this.nsoffers=0;
     await this.getCurrentUser();
+   
     
   }
 
@@ -41,11 +58,64 @@ export class DashsellerComponent implements OnInit {
        this.currentuser = response;
        console.log(this.currentuser.firstName);
        console.log(this.currentuser);
+       this.getAvailableOffres();
+       this.getFinishedOffres();
+       this.getNotStartedOffres();
+       this.getNOffres();
      },
      (error: HttpErrorResponse) => {
        alert(error.message);
      }
    );
  }
+
+ public getAvailableOffres(): void {
+  this.offreService.getOffersAvailablebyuser(this.currentuser.id).subscribe(
+    (response: Offre[]) => {
+      this.availableoffers = response;
+      console.log("sala"+this.availableoffers.length)
+      this.avoffers=this.availableoffers.length;
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+  );
+}
+
+public getFinishedOffres(): void {
+  this.offreService.getOffersFinishedbyuser(this.currentuser.id).subscribe(
+    (response: Offre[]) => {
+      this.finishedoffers = response;
+      this.fioffers=this.finishedoffers.length;
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+  );
+}
+
+public getNotStartedOffres(): void {
+  this.offreService.getOffersNotStartedbyuser(this.currentuser.id).subscribe(
+    (response: Offre[]) => {
+      this.notstartedoffers = response;
+      this.nsoffers=this.notstartedoffers.length;
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+  );
+}
+
+public getNOffres(): void {
+  this.offreService.getofferByIdUser(this.currentuser.id).subscribe(
+    (response: Offre[]) => {
+      this.offers = response;
+      this.nboffers=this.offers.length;
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+  );
+}
 
 }

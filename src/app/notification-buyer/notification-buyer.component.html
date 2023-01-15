@@ -1,0 +1,196 @@
+<style>
+    .notice {
+  position: relative;
+  margin: 1em;
+  background: #F9F9F9;
+  padding: 1em 1em 1em 2em;
+  border-left: 4px solid #DDD;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.125);
+}
+.notice:before {
+  position: absolute;
+  top: 50%;
+  margin-top: -17px;
+  left: -17px;
+  background-color: #DDD;
+  color: #FFF;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 30px;
+  font-weight: bold;
+  font-family: Georgia;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+}
+.success {
+  border-color: #2ECC40;
+}
+
+.success:before {
+  content: "√";
+  background-color: #2ECC40;
+}
+</style>
+
+<div class="top-header-area" id="sticker">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 text-center">
+                <div class="main-menu-wrap">
+                    <!-- logo -->
+                    <div class="site-logo">
+                        <a >
+                            <img src="assets/img/logo3.png" alt="" width="1000px" >
+                        </a>
+                    </div>
+                    <!-- logo -->
+
+                    <!-- menu start -->
+                    <nav class="main-menu">
+                        <ul>
+                            <li class="current-list-item"><a [routerLink]="'/homePage'">Home</a>
+                            </li>
+                            >
+                            <li class="current-list-item"><a [routerLink]="'/notificationBuyer'">Notification</a>
+                            </li>
+                            <li><a ></a></li>
+                           
+                        </ul>
+                    </nav>
+                    <a class="mobile-show search-bar-icon" ><i class="fas fa-search"></i></a>
+                    <div class="mobile-menu"></div>
+                    <!-- menu end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end header -->
+
+<!-- search area -->
+<div class="search-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <span class="close-btn"><i class="fas fa-window-close"></i></span>
+                <div class="search-bar">
+                    <div class="search-bar-tablecell">
+                        <h3>Search For:</h3>
+                        <input type="text" placeholder="Keywords">
+                        <button type="submit">Search <i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end search area -->
+
+<!-- hero area -->
+<div class="hero-area hero-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 offset-lg-2 text-center">
+                <div class="hero-text">
+                    <div class="hero-text-tablecell">
+                        <p class="subtitle">World's Most Popular</p>
+                        <h1>Real Estate Auction</h1>
+                        <h1 *ngIf="this.currentuser!=null">Welcome {{this.currentuser.firstName}}</h1>
+                        <div class="hero-btns">
+                            <a *ngIf="this.currentuser==null" [routerLink]="'/register'" class="boxed-btn">Sign In</a>
+                            <a *ngIf="this.currentuser==null" [routerLink]="'/register'" class="bordered-btn">Sign Up</a>
+                            <a *ngIf="this.currentuser!=null" (click)="getLogout();" class="bordered-btn">Sign Out</a>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end hero area -->
+
+
+
+
+<!-- end product section -->
+
+<!-- cart banner section -->
+<section class="cart-banner pt-100 pb-100">
+    <div class="container">
+        <div class="row clearfix">
+            <!--Image Column-->
+            
+            <!--Content Column-->
+            <div >
+                <h3><span class="orange-text">Your Notifications</span> </h3>
+                <h4>find out the auctions you win</h4>
+                <div class="text"></div>
+                <div *ngFor="let offre of auctionwinners;">
+                <!--Countdown Timer-->
+                <div > <div class="notice success"><p> Congratulation ,you win the offer with price {{offre.priceWin}}.</p>
+                    <div *ngIf="offre.statut==etat">
+                    <button type="button" class="btn btn-info m-4"  (click)="accepter(offre.id)" >accepter</button>
+                    <button type="button" class="btn btn-secondary" (click)="refuser(offre.id)">refuser</button></div>
+                </div>
+                <div *ngIf="offre.statut==etataccepter">
+                    you already accept this offer
+                </div>
+                <div *ngIf="offre.statut==etatrefuser">
+                    you already refuse this offer
+                </div>
+                   </div>
+               
+            </div>
+           </div>
+        </div>
+    </div>
+</section>
+<!-- end cart banner section -->
+
+
+
+
+
+
+
+<!-- end footer -->
+
+<!-- copyright -->
+<div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <p>Copyrights &copy; 2023 - <a href="https://imransdesign.com/">Ikrame nouigua & Houda jouhar</a>,  All Rights Reserved.<br>
+                   
+                </p>
+            </div>
+            <div class="col-lg-6 text-right col-md-12">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end copyright -->
+
+<!-- jquery -->
+<script src="assets/js/jquery-1.11.3.min.js"></script>
+<!-- bootstrap -->
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<!-- count down -->
+<script src="assets/js/jquery.countdown.js"></script>
+<!-- isotope -->
+<script src="assets/js/jquery.isotope-3.0.6.min.js"></script>
+<!-- waypoints -->
+<script src="assets/js/waypoints.js"></script>
+<!-- owl carousel -->
+<script src="assets/js/owl.carousel.min.js"></script>
+<!-- magnific popup -->
+<script src="assets/js/jquery.magnific-popup.min.js"></script>
+<!-- mean menu -->
+<script src="assets/js/jquery.meanmenu.min.js"></script>
+<!-- sticker js -->
+<script src="assets/js/sticker.js"></script>
+<!-- main js -->
+<script src="assets/js/main.js"></script>

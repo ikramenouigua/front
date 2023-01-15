@@ -16,6 +16,15 @@ export class OffresService {
   public getOffers():Observable<any>{
     return this.http.get<any>(`${this.apiServerURL}/offers/allOffers`)
   }
+  public getOffersAvailablebyuser(iduser: number):Observable<any>{
+    return this.http.get<any>(`${this.apiServerURL}/offers/getOffersByUseravailable/${iduser}`)
+  }
+  public getOffersFinishedbyuser(iduser: number):Observable<any>{
+    return this.http.get<any>(`${this.apiServerURL}/offers/getOffersByUserfinished/${iduser}`)
+  }
+  public getOffersNotStartedbyuser(iduser: number):Observable<any>{
+    return this.http.get<any>(`${this.apiServerURL}/offers/getOffersByUsernotstarted/${iduser}`)
+  }
 
   public addOffer(offer: Offre): Observable<Offre> {
     return this.http.post<Offre>(`${this.apiServerURL}/offers/add`, offer);
