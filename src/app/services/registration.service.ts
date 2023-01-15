@@ -35,6 +35,9 @@ export class RegistrationService {
   public getLogout():Observable<any>{
     return this.http.get<any>(`${this.apiServerURL}/api/v1/registration/logout`)
   }
+  public getUserbyid(id:number):Observable<any>{
+    return this.http.get<any>(`${this.apiServerURL}/api/v1/registration/getUser/${id}`)
+  }
 
   public getUsers():Observable<any>{
     return this.http.get<any>(`${this.apiServerURL}/api/v1/registration/allUser`)

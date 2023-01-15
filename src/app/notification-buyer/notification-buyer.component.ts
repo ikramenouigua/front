@@ -22,6 +22,7 @@ export class NotificationBuyerComponent {
   public logout : String=new String();
   public auc=new Auctionwinner();
 
+  public seller : Appuser = new Appuser();
 
   constructor(private registrationService: RegistrationService, private sharedService : SharedServiceService,
     private offreService: OffresService ,private router : Router,private winnerAuctionService:WinnerauctionService){}
@@ -60,14 +61,32 @@ export class NotificationBuyerComponent {
       (response: Auctionwinner[]) => {
         this.auctionwinners = response;
         console.log(this.auctionwinners)
-        for(let auction in this.auctionwinners){
-           console.log(auction.statut)
-        }
+      for(let auction of this.auctionwinners){
+        console.log("kk"+auction.status)
+      }
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
     );
+  }
+  public getinfo(id:number){
+    this.registrationService.getUserbyid(id).subscribe(
+      (response: Appuser) => {
+        this.seller = response;
+        console.log(this.seller);
+        console.log(this.seller.email)
+        alert("seller email :"+this.seller.email+
+        "\nphone number:"+this.seller.phone+
+        "\nfull name:"+this.seller.firstName+" "+this.seller.lastName
+        );
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+   
+  
   }
 
   async ngOnInit() : Promise<void>{

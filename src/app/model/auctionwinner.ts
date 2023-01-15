@@ -3,6 +3,7 @@ export class Auctionwinner {
     priceWin!:number
     iduser!:number;
     idOffer:number;
-    statut:any
+    status:any;
+    idseller:number;
     
 }
