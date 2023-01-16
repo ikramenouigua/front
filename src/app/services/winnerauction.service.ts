@@ -22,5 +22,8 @@ export class WinnerauctionService {
   public getAuctionVendu(id:number):Observable<any>{
     return this.http.get<any>(`${this.apiServerURL}/winnerAuction/sellerwinauction/${id}`)
   }
+  public getOffer(id:number):Observable<any>{
+    return this.http.get<any>(`${this.apiServerURL}/winnerAuction/getoffer/${id}`)
+  }
 
 }

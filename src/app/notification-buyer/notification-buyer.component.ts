@@ -7,6 +7,7 @@ import { RegistrationService } from '../services/registration.service';
 import { SharedServiceService } from '../services/shared-service.service';
 import { WinnerauctionService } from '../services/winnerauction.service';
 import {Auctionwinner} from '../model/auctionwinner';
+import { Offre } from '../model/offre.model';
 
 @Component({
   selector: 'app-notification-buyer',
@@ -62,7 +63,12 @@ export class NotificationBuyerComponent {
         this.auctionwinners = response;
         console.log(this.auctionwinners)
       for(let auction of this.auctionwinners){
-        console.log("kk"+auction.status)
+        this.winnerAuctionService.getOffer(auction.id).subscribe(
+          (response:Offre)=>{
+            auction.offer=response;
+            console.log(auction.offer)
+          }
+        )
       }
       },
       (error: HttpErrorResponse) => {
@@ -76,9 +82,10 @@ export class NotificationBuyerComponent {
         this.seller = response;
         console.log(this.seller);
         console.log(this.seller.email)
-        alert("seller email :"+this.seller.email+
-        "\nphone number:"+this.seller.phone+
-        "\nfull name:"+this.seller.firstName+" "+this.seller.lastName
+        alert("Here are the seller informations \n"+
+          "Email :"+this.seller.email+
+        "\nOhone number:"+this.seller.phone+
+        "\nFull name:"+this.seller.firstName+" "+this.seller.lastName
         );
       },
       (error: HttpErrorResponse) => {

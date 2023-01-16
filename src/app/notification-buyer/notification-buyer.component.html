@@ -133,7 +133,7 @@
                 <div class="text"></div>
                 <div *ngFor="let offre of auctionwinners;">
                 <!--Countdown Timer-->
-                <div > <div class="notice success"><p> Congratulation ,you win the offer with price {{offre.priceWin}}.</p>
+                <div > <div class="notice success"><p> Congratulation ,you win the offer with title <strong>{{offre.offer.title}} </strong>with price<strong> {{offre.priceWin}} DH</strong> contain <strong>{{offre.offer.nbChambre}}</strong> rooms and surface <strong>{{offre.offer.surface}} m^2</strong></p>
                     <div *ngIf="offre.status==etat">
                     <button type="button" class="btn btn-info m-4"  (click)="accepter(offre.id)" >accepter</button>
                     <button type="button" class="btn btn-secondary" (click)="refuser(offre.id)">refuser</button></div>

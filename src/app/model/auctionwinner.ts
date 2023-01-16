@@ -5,5 +5,6 @@ export class Auctionwinner {
     idOffer:number;
     status:any;
     idseller:number;
+    offer:any;
     
 }
